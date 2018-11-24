@@ -158,7 +158,7 @@ button {
 }
 
 .product__price:before {
-  content: "$";
+  content: "\20B9";
 }
 
 .product__image {
@@ -252,7 +252,7 @@ button {
 }
 
 .cart__item__price:before {
-  content: "$";
+  content: "\20B9";
 }
 
 .cart-footer {
