@@ -1,2 +1,0 @@
-# VanillaCart
-Created with CodeSandbox
