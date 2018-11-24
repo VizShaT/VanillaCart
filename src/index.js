@@ -11,7 +11,8 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
     const product = {
       image: productDOM.querySelector(".product__image").getAttribute("src"),
       name: productDOM.querySelector(".product__name").innerText,
-      price: productDOM.querySelector(".product__price").innerText
+      price: productDOM.querySelector(".product__price").innerText,
+      quantity: 1
     };
 
     const isInCart =
@@ -26,11 +27,37 @@ addToCartButtonsDOM.forEach(addToCartButtonDOM => {
         }" />
       <h3 class="cart__item__name">${product.name}</h3>
       <h3 class="cart__item__price">${product.price}</h3>
+      <button class="btn btn--primary btn--small" data-action="DECREASE_ITEM">
+        &minus;
+      </button>
+      <h3 class="cart__item__quantity">${product.quantity}</h3>
+      <button class="btn btn--primary btn--small" data-action="INCREASE_ITEM">&plus;</button>
+      <button class="btn btn--danger btn--small data-action="REMOVE_ITEMS">&times;</button>
     </div>`
       );
 
       cart.push(product);
       addToCartButtonDOM.innerText = "In Cart";
+
+      const cartItemsDOM = cartDOM.querySelectorAll(".cart__item");
+      cartItemsDOM.forEach(cartItemDOM => {
+        if (
+          cartItemDOM.querySelector(".cart__item__name").innerText ===
+          product.name
+        ) {
+          cartItemDOM
+            .querySelector('[data-action = "INCREASE_ITEM"]')
+            .addEventListener("click", () => {
+              cart.forEach(cartItem => {
+                if (cartItem.name === product.name) {
+                  cartItemDOM.querySelector(
+                    ".cart__item__quantity"
+                  ).innerText = ++cartItem.quantity;
+                }
+              });
+            });
+        }
+      });
     }
   });
 });
